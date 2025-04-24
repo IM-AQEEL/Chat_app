@@ -1,6 +1,6 @@
 import 'package:chat_app/config/pagepath.dart';
 import 'package:chat_app/config/theme.dart';
-import 'package:chat_app/widgets/welcome/welcome.dart';
+import 'package:chat_app/pages/HomePage/home.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 
@@ -16,11 +16,11 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       getPages: pagepath,
       debugShowCheckedModeBanner: false,
-      //theme: lighttheme,
+      theme: lighttheme,
       title: 'Flutter Demo',
       darkTheme: darktheme,
       themeMode: ThemeMode.dark,
-      home: Welcome(),
+      home: Home(),
     );
   }
 }

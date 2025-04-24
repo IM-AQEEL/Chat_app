@@ -21,7 +21,7 @@ class Authpage extends StatelessWidget {
                   //
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children: [Authpagebody()],
+                    children: [AuthPageBody()],
                   ),
                 ],
               ),
