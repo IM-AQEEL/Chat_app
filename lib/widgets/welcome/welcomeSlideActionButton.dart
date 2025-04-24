@@ -27,7 +27,8 @@ class Welcomeslideactionbutton extends StatelessWidget {
             animationDuration: const Duration(milliseconds: 300),
             onSubmit: () {
               //
-              Get.off('');
+              Get.offAllNamed("/authpage");
+              return null;
             },
 
             text: 'Slide to Next',

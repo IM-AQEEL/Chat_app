@@ -1,5 +1,5 @@
-import 'package:chat_app/pages/splashScreen/welcomepage/welcomeSlideActionButton.dart';
-import 'package:chat_app/pages/splashScreen/welcomepage/welcomebody.dart';
+import 'package:chat_app/widgets/welcome/welcomeSlideActionButton.dart';
+import 'package:chat_app/widgets/welcome/welcomebody.dart';
 import 'package:chat_app/widgets/welcome/headingpage.dart';
 import 'package:flutter/material.dart';
 

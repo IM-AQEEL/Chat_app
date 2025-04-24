@@ -10,7 +10,11 @@ class Headingpage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        SvgPicture.asset(Assetsimages.appIcon, height: 50, color: Colors.blue),
+        SvgPicture.asset(
+          Assetsimages.appIcon,
+          height: 50,
+          color: Theme.of(context).colorScheme.primary,
+        ),
         SizedBox(height: 20),
         Text(
           AppStrings.appname,

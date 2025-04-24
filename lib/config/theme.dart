@@ -9,8 +9,8 @@ var darktheme = ThemeData(
     //
     primary: dprimaryColor,
     onPrimary: dbackgroundColor,
-    background: dbackgroundColor,
-    onBackground: donbackground,
+    surface: dbackgroundColor,
+    onSurface: donbackground,
     primaryContainer: dContainerColor,
     onPrimaryContainer: donContainerColor,
   ),
@@ -32,6 +32,18 @@ var darktheme = ThemeData(
       color: dprimaryColor,
       fontFamily: "Poppins",
       fontWeight: FontWeight.w600,
+    ),
+    bodyLarge: TextStyle(
+      fontSize: 15,
+      color: donbackground,
+      fontFamily: "Poppins",
+      fontWeight: FontWeight.w500,
+    ),
+    bodySmall: TextStyle(
+      fontSize: 10,
+      color: donContainerColor,
+      fontFamily: "Poppins",
+      fontWeight: FontWeight.w500,
     ),
   ),
 );
