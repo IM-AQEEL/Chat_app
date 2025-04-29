@@ -1,5 +1,5 @@
 import 'package:chat_app/config/AssetsImages.dart';
-import 'package:chat_app/pages/HomePage/widget_chat_page/chat_page_body.dart';
+import 'package:chat_app/pages/HomePage/widget_chat_page/chatView.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter/gestures.dart';
@@ -23,7 +23,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.background,
+      backgroundColor: Theme.of(context).colorScheme.surface,
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.primaryContainer,
         toolbarHeight: 70,

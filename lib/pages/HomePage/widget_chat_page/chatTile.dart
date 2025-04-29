@@ -1,53 +1,74 @@
-import 'package:chat_app/config/AssetsImages.dart';
+// Created by Muhammad Aqeel on 24/04/2025.
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/route_manager.dart';
 
 class Chattile extends StatelessWidget {
-  const Chattile({super.key});
+  final String image;
+  final String name;
+  final String message;
+  final String time;
+  const Chattile({
+    super.key,
+    required this.name,
+    required this.message,
+    required this.time,
+    required this.image,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10),
-            color: Theme.of(context).colorScheme.primaryContainer,
-          ),
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Row(
+    return SingleChildScrollView(
+      scrollDirection: Axis.vertical,
+      child: Column(
+        children: [
+          InkWell(
+            onTap: () {
+              // Navigate to chat page
+              Get.toNamed('/chatpage');
+            },
+            child: Container(
+              margin: const EdgeInsets.only(bottom: 10),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                color: Theme.of(context).colorScheme.primaryContainer,
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    SvgPicture.asset(Assetsimages.manimage, height: 50),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 10.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Muhammad Aqeel',
-                            style: Theme.of(context).textTheme.bodyLarge,
+                    Row(
+                      children: [
+                        SvgPicture.asset(image, height: 50),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 10.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                '$name',
+                                style: Theme.of(context).textTheme.bodyLarge,
+                              ),
+                              SizedBox(height: 8),
+                              Text(
+                                '$message?',
+                                style: Theme.of(context).textTheme.bodySmall,
+                              ),
+                            ],
                           ),
-                          SizedBox(height: 8),
-                          Text(
-                            'Kya hal Hai Aqeel Bhai Apka ?',
-                            style: Theme.of(context).textTheme.bodySmall,
-                          ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
+
+                    Text('$time', style: Theme.of(context).textTheme.bodySmall),
                   ],
                 ),
-
-                Text('10:00pm', style: Theme.of(context).textTheme.bodySmall),
-              ],
+              ),
             ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

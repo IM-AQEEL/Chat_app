@@ -5,6 +5,16 @@ var lighttheme = ThemeData();
 var darktheme = ThemeData(
   brightness: Brightness.dark,
   useMaterial3: true,
+  appBarTheme: AppBarTheme(
+    backgroundColor: dContainerColor,
+    titleTextStyle: TextStyle(
+      fontSize: 20,
+
+      fontFamily: "Poppins",
+      fontWeight: FontWeight.w600,
+    ),
+    iconTheme: IconThemeData(color: Colors.white),
+  ),
   colorScheme: ColorScheme.dark(
     //
     primary: dprimaryColor,

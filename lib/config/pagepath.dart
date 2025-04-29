@@ -1,5 +1,6 @@
 import 'package:chat_app/pages/AuthPages/authpage.dart';
 import 'package:chat_app/pages/HomePage/home.dart';
+import 'package:chat_app/pages/chat/chatpage.dart';
 import 'package:get/route_manager.dart';
 
 var pagepath = [
@@ -12,6 +13,11 @@ var pagepath = [
   GetPage(
     name: "/homePage",
     page: () => Home(),
+    transition: Transition.rightToLeft,
+  ),
+  GetPage(
+    name: "/chatpage",
+    page: () => Chatpage(),
     transition: Transition.rightToLeft,
   ),
 ];
