@@ -9,11 +9,14 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  cupertino_icons: ^1.0.8
-  flutter_svg: ^2.1.0
-  slide_to_act: ^2.0.2
-  get: ^4.7.2
-
+  cupertino_icons: ^1.0.8 
+  flutter_svg: ^2.1.0 
+  slide_to_act: ^2.0.2 
+  get: ^4.7.2 
+  firebase_core: ^3.13.0
+  firebase_auth: ^5.5.3
+  cloud_firestore: ^5.6.7
+  
 dev_dependencies:
   flutter_test:
     sdk: flutter

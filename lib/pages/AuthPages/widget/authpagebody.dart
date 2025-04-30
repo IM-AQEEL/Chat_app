@@ -1,15 +1,20 @@
+import 'package:chat_app/controller/AuthController.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get_rx/src/rx_types/rx_types.dart';
-import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
-import 'package:get/route_manager.dart';
+import 'package:get/get.dart';
 
 class AuthPageBody extends StatelessWidget {
-  const AuthPageBody({super.key});
+  AuthPageBody({super.key});
+
+  final AuthController authController = Get.put(AuthController());
+  final TextEditingController loginemail = TextEditingController();
+  final TextEditingController loginpassword = TextEditingController();
+  final TextEditingController signupemail = TextEditingController();
+  final TextEditingController signupusername = TextEditingController();
+  final TextEditingController signuppassword = TextEditingController();
+  final isLogin = true.obs;
 
   @override
   Widget build(BuildContext context) {
-    final isLogin = true.obs;
-
     return Container(
       width: 335,
       height: 335,
@@ -22,85 +27,20 @@ class AuthPageBody extends StatelessWidget {
           // Tab Bar
           Row(
             children: [
-              // Login Tab
               Obx(
-                () => Expanded(
-                  child: GestureDetector(
-                    onTap: () => isLogin.value = true,
-                    child: Container(
-                      decoration: BoxDecoration(
-                        border: Border(
-                          bottom: BorderSide(
-                            color:
-                                isLogin.value
-                                    ? Theme.of(context).colorScheme.primary
-                                    : Colors.transparent,
-                            width: 2,
-                          ),
-                        ),
-                      ),
-                      padding: const EdgeInsets.symmetric(vertical: 16),
-                      child: Text(
-                        'Login',
-                        textAlign: TextAlign.center,
-                        style: Theme.of(
-                          context,
-                        ).textTheme.titleMedium?.copyWith(
-                          fontWeight:
-                              isLogin.value
-                                  ? FontWeight.bold
-                                  : FontWeight.normal,
-                          color:
-                              isLogin.value
-                                  ? Theme.of(context).colorScheme.primary
-                                  : Theme.of(
-                                    context,
-                                  ).colorScheme.onSurface.withOpacity(0.6),
-                        ),
-                      ),
-                    ),
-                  ),
+                () => _buildAuthTab(
+                  context: context,
+                  label: 'Login',
+                  isSelected: isLogin.value,
+                  onTap: () => isLogin.value = true,
                 ),
               ),
-
-              // Signup Tab
               Obx(
-                () => Expanded(
-                  child: GestureDetector(
-                    onTap: () => isLogin.value = false,
-                    child: Container(
-                      decoration: BoxDecoration(
-                        border: Border(
-                          bottom: BorderSide(
-                            color:
-                                !isLogin.value
-                                    ? Theme.of(context).colorScheme.primary
-                                    : Colors.transparent,
-                            width: 2,
-                          ),
-                        ),
-                      ),
-                      padding: const EdgeInsets.symmetric(vertical: 16),
-                      child: Text(
-                        'Signup',
-                        textAlign: TextAlign.center,
-                        style: Theme.of(
-                          context,
-                        ).textTheme.titleMedium?.copyWith(
-                          fontWeight:
-                              !isLogin.value
-                                  ? FontWeight.bold
-                                  : FontWeight.normal,
-                          color:
-                              !isLogin.value
-                                  ? Theme.of(context).colorScheme.primary
-                                  : Theme.of(
-                                    context,
-                                  ).colorScheme.onSurface.withOpacity(0.6),
-                        ),
-                      ),
-                    ),
-                  ),
+                () => _buildAuthTab(
+                  context: context,
+                  label: 'Signup',
+                  isSelected: !isLogin.value,
+                  onTap: () => isLogin.value = false,
                 ),
               ),
             ],
@@ -123,11 +63,54 @@ class AuthPageBody extends StatelessWidget {
     );
   }
 
+  Widget _buildAuthTab({
+    required BuildContext context,
+    required String label,
+    required bool isSelected,
+    required VoidCallback onTap,
+  }) {
+    return Expanded(
+      child: GestureDetector(
+        onTap: onTap,
+        child: Container(
+          decoration: BoxDecoration(
+            border: Border(
+              bottom: BorderSide(
+                color:
+                    isSelected
+                        ? Theme.of(context).colorScheme.primary
+                        : Colors.transparent,
+                width: 2,
+              ),
+            ),
+          ),
+          padding: const EdgeInsets.symmetric(vertical: 16),
+          child: Text(
+            label,
+            textAlign: TextAlign.center,
+            style: Theme.of(context).textTheme.titleMedium?.copyWith(
+              fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
+              color:
+                  isSelected
+                      ? Theme.of(context).colorScheme.primary
+                      : Theme.of(
+                        context,
+                      ).colorScheme.onSurface.withOpacity(0.6),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  /// Login Form
+
   Widget _buildLoginForm(BuildContext context) {
     return Column(
       children: [
         const SizedBox(height: 20),
         TextField(
+          controller: loginemail,
           decoration: InputDecoration(
             labelText: 'Email',
             border: OutlineInputBorder(
@@ -140,6 +123,7 @@ class AuthPageBody extends StatelessWidget {
         ),
         const SizedBox(height: 16),
         TextField(
+          controller: loginpassword,
           obscureText: true,
           decoration: InputDecoration(
             labelText: 'Password',
@@ -156,7 +140,11 @@ class AuthPageBody extends StatelessWidget {
           width: 140,
           child: ElevatedButton(
             onPressed: () {
-              Get.offAllNamed('/homePage');
+              if (loginemail.text.isEmpty || loginpassword.text.isEmpty) {
+                Get.snackbar('Error', 'Please fill all fields');
+                return;
+              }
+              authController.login(loginemail.text, loginpassword.text);
             },
             style: ElevatedButton.styleFrom(
               backgroundColor: Theme.of(context).colorScheme.primary,
@@ -165,11 +153,18 @@ class AuthPageBody extends StatelessWidget {
                 borderRadius: BorderRadius.circular(10),
               ),
             ),
-            child: Text(
-              'LOGIN',
-              style: TextStyle(
-                color: Theme.of(context).colorScheme.onPrimary,
-                fontWeight: FontWeight.bold,
+            child: Obx(
+              () => Center(
+                child:
+                    authController.isloading.value
+                        ? CircularProgressIndicator(color: Colors.white)
+                        : Text(
+                          'LOGIN',
+                          style: TextStyle(
+                            color: Theme.of(context).colorScheme.onPrimary,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
               ),
             ),
           ),
@@ -178,11 +173,13 @@ class AuthPageBody extends StatelessWidget {
     );
   }
 
+  /// Sign Up Form
   Widget _buildSignupForm(BuildContext context) {
     return Column(
       children: [
         const SizedBox(height: 20),
         TextField(
+          controller: signupemail,
           decoration: InputDecoration(
             labelText: 'Email',
             border: OutlineInputBorder(
@@ -195,6 +192,7 @@ class AuthPageBody extends StatelessWidget {
         ),
         const SizedBox(height: 16),
         TextField(
+          controller: signupusername,
           decoration: InputDecoration(
             labelText: 'Username',
             border: OutlineInputBorder(
@@ -207,6 +205,7 @@ class AuthPageBody extends StatelessWidget {
         ),
         const SizedBox(height: 16),
         TextField(
+          controller: signuppassword,
           obscureText: true,
           decoration: InputDecoration(
             labelText: 'Password',
@@ -222,7 +221,19 @@ class AuthPageBody extends StatelessWidget {
         SizedBox(
           width: 140,
           child: ElevatedButton(
-            onPressed: () {},
+            onPressed: () {
+              if (signupemail.text.isEmpty ||
+                  signupusername.text.isEmpty ||
+                  signuppassword.text.isEmpty) {
+                Get.snackbar('Error', 'Please fill all fields');
+                return;
+              }
+              authController.createUser(
+                signupemail.text,
+                signupemail.text,
+                signupusername.text,
+              );
+            },
             style: ElevatedButton.styleFrom(
               backgroundColor: Theme.of(context).colorScheme.primary,
               padding: const EdgeInsets.symmetric(vertical: 16),
@@ -230,11 +241,18 @@ class AuthPageBody extends StatelessWidget {
                 borderRadius: BorderRadius.circular(10),
               ),
             ),
-            child: Text(
-              'SIGNUP',
-              style: TextStyle(
-                color: Theme.of(context).colorScheme.onPrimary,
-                fontWeight: FontWeight.bold,
+            child: Obx(
+              () => Center(
+                child:
+                    authController.isloading.value
+                        ? CircularProgressIndicator(color: Colors.white)
+                        : Text(
+                          'SIGNUP',
+                          style: TextStyle(
+                            color: Theme.of(context).colorScheme.onPrimary,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
               ),
             ),
           ),

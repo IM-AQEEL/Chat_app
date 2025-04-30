@@ -8,6 +8,64 @@ class Chatpage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      bottomNavigationBar: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 15),
+        child: Container(
+          height: 60,
+          decoration: BoxDecoration(
+            color: Theme.of(context).colorScheme.primaryContainer,
+            borderRadius: BorderRadius.circular(40),
+          ),
+
+          child: Center(
+            child: TextFormField(
+              decoration: InputDecoration(
+                border: InputBorder.none,
+                hintText: 'Type a message...',
+                hintStyle: TextStyle(
+                  color: Theme.of(context).colorScheme.onPrimaryContainer,
+                ),
+                contentPadding: EdgeInsets.symmetric(
+                  vertical: 12,
+                  horizontal: 16,
+                ),
+                prefixIcon: Padding(
+                  padding: EdgeInsets.only(left: 8, right: 12),
+                  //Mic button
+                  child: IconButton(
+                    onPressed: () {},
+                    icon: Icon(Icons.mic),
+                    color: Theme.of(context).colorScheme.onPrimaryContainer,
+                    padding: EdgeInsets.zero,
+                  ),
+                ),
+                suffixIcon: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    //Image Button
+                    IconButton(
+                      onPressed: () {},
+                      icon: Icon(Icons.image_rounded),
+                      color: Theme.of(context).colorScheme.onPrimaryContainer,
+                      padding: EdgeInsets.zero,
+                    ),
+                    // SizedBox(width: 5),
+                    //Send Button
+                    IconButton(
+                      onPressed: () {},
+                      icon: Icon(Icons.send_sharp),
+                      color: Theme.of(context).colorScheme.onPrimaryContainer,
+                      padding: EdgeInsets.zero,
+                    ),
+                    SizedBox(width: 8),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+
       appBar: AppBar(
         actions: [
           Padding(
@@ -56,8 +114,52 @@ class Chatpage extends StatelessWidget {
 
       body: Padding(
         padding: EdgeInsets.only(left: 10, right: 10, top: 10),
-        child: Column(
-          children: [ChatBubble(message: 'Hello How are you', time: '13:00')],
+        child: ListView(
+          children: [
+            ChatBubble(
+              message: 'Hello How are you',
+              time: '11:00 Am',
+              imageurl: '',
+              isdeliver: true,
+              isread: false,
+              isComing: true,
+            ),
+            ChatBubble(
+              message: 'Hello How are you I am Fine and what about you ',
+              time: '11:00 Am',
+              imageurl: '',
+              isread: false,
+              isdeliver: true,
+              isComing: false,
+            ),
+            ChatBubble(
+              message: 'Hello How are you I am Fine and what about you ',
+              time: '11:00 Am',
+              imageurl:
+                  'https://media.istockphoto.com/id/814423752/photo/eye-of-model-with-colorful-art-make-up-close-up.jpg?s=612x612&w=0&k=20&c=l15OdMWjgCKycMMShP8UK94ELVlEGvt7GmB_esHWPYE=',
+              isread: false,
+              isdeliver: true,
+              isComing: false,
+            ),
+            ChatBubble(
+              message: 'Hello How are you I am Fine and what about you ',
+              time: '11:00 Am',
+              imageurl:
+                  'https://media.istockphoto.com/id/814423752/photo/eye-of-model-with-colorful-art-make-up-close-up.jpg?s=612x612&w=0&k=20&c=l15OdMWjgCKycMMShP8UK94ELVlEGvt7GmB_esHWPYE=',
+              isread: false,
+              isdeliver: true,
+              isComing: false,
+            ),
+            ChatBubble(
+              message: 'Hello How are you I am Fine and what about you ',
+              time: '11:00 Am',
+              imageurl:
+                  'https://media.istockphoto.com/id/814423752/photo/eye-of-model-with-colorful-art-make-up-close-up.jpg?s=612x612&w=0&k=20&c=l15OdMWjgCKycMMShP8UK94ELVlEGvt7GmB_esHWPYE=',
+              isread: false,
+              isdeliver: true,
+              isComing: false,
+            ),
+          ],
         ),
       ),
     );
