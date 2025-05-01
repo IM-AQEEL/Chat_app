@@ -1,7 +1,8 @@
 import 'package:chat_app/config/pagepath.dart';
 import 'package:chat_app/config/theme.dart';
 import 'package:chat_app/firebase_options.dart';
-import 'package:chat_app/pages/AuthPages/authpage.dart';
+import 'package:chat_app/pages/splashScreen/splashScreen.dart';
+import 'package:chat_app/widgets/welcome/welcome.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
@@ -24,7 +25,7 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       darkTheme: darktheme,
       themeMode: ThemeMode.dark,
-      home: Authpage(),
+      home: Splashscreen(),
     );
   }
 }

@@ -139,12 +139,22 @@ class AuthPageBody extends StatelessWidget {
         SizedBox(
           width: 140,
           child: ElevatedButton(
-            onPressed: () {
+            onPressed: () async {
               if (loginemail.text.isEmpty || loginpassword.text.isEmpty) {
-                Get.snackbar('Error', 'Please fill all fields');
+                Get.snackbar(
+                  'Error',
+                  'Please fill all fields',
+                  animationDuration: Duration(milliseconds: 300),
+                );
                 return;
               }
-              authController.login(loginemail.text, loginpassword.text);
+
+              void loginSuccess = await authController.login(
+                loginemail.text,
+                loginpassword.text,
+              );
+
+              Get.snackbar('Sucess ', 'Login Sucessfully');
             },
             style: ElevatedButton.styleFrom(
               backgroundColor: Theme.of(context).colorScheme.primary,
@@ -221,19 +231,25 @@ class AuthPageBody extends StatelessWidget {
         SizedBox(
           width: 140,
           child: ElevatedButton(
-            onPressed: () {
+            onPressed: () async {
               if (signupemail.text.isEmpty ||
                   signupusername.text.isEmpty ||
                   signuppassword.text.isEmpty) {
-                Get.snackbar('Error', 'Please fill all fields');
+                Get.snackbar(
+                  'Error',
+                  'Please fill all fields',
+                  animationDuration: Duration(milliseconds: 300),
+                );
                 return;
               }
-              authController.createUser(
+              await authController.createUser(
                 signupemail.text,
                 signupemail.text,
                 signupusername.text,
               );
+              Get.snackbar('Success', 'Account was created successfully');
             },
+
             style: ElevatedButton.styleFrom(
               backgroundColor: Theme.of(context).colorScheme.primary,
               padding: const EdgeInsets.symmetric(vertical: 16),

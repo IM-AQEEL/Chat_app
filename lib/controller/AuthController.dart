@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 class AuthController extends GetxController {
   final auth = FirebaseAuth.instance;
   RxBool isloading = false.obs;
-  //
+
   // For Login
   Future<void> login(String password, String email) async {
     isloading.value = true;

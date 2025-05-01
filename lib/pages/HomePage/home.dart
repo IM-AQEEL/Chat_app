@@ -3,6 +3,8 @@ import 'package:chat_app/pages/HomePage/widget_chat_page/chatView.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter/gestures.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -30,7 +32,12 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
         actions: [
           IconButton(icon: Icon(Icons.search, size: 30), onPressed: () {}),
 
-          IconButton(icon: Icon(Icons.more_vert, size: 30), onPressed: () {}),
+          IconButton(
+            icon: Icon(Icons.more_vert, size: 30),
+            onPressed: () {
+              Get.toNamed('/profilepage');
+            },
+          ),
         ],
         leading: Padding(
           padding: const EdgeInsets.only(left: 10.0, top: 10),
