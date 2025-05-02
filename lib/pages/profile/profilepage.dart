@@ -1,14 +1,17 @@
+import 'package:chat_app/controller/AuthController.dart';
 import 'package:chat_app/pages/profile/widgets/profile_Descripaation.dart';
 import 'package:chat_app/pages/profile/widgets/profile_Heading.dart';
 import 'package:chat_app/pages/profile/widgets/profilebody.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 
 class Profilepage extends StatelessWidget {
   const Profilepage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    AuthController authController = Get.put(AuthController());
     return Scaffold(
       appBar: AppBar(
         actions: [
@@ -17,7 +20,7 @@ class Profilepage extends StatelessWidget {
             child: Container(
               child: IconButton(
                 onPressed: () {
-                  Get.toNamed('/welcome');
+                  authController.signout();
                 },
                 icon: Icon(Icons.logout),
               ),

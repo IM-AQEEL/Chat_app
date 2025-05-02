@@ -1,8 +1,11 @@
+import 'package:chat_app/model/usermodel.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 
 class AuthController extends GetxController {
   final auth = FirebaseAuth.instance;
+  final db = FirebaseFirestore.instance;
   RxBool isloading = false.obs;
 
   // For Login
@@ -38,6 +41,8 @@ class AuthController extends GetxController {
         email: email,
         password: password,
       );
+      await initUser(email, username, auth.currentUser!.uid);
+      print('User Created');
     } on FirebaseException catch (e) {
       if (e.code == 'Weak password') {
         print('password provided was too weak');
@@ -50,5 +55,31 @@ class AuthController extends GetxController {
       print(e);
     }
     print('User Was created');
+  }
+
+  Future<void> signout() async {
+    await auth.signOut();
+    Get.offAllNamed("/authpage");
+  }
+
+  Future<void> initUser(String email, String username, String id) async {
+    final user = FirebaseAuth.instance.currentUser;
+    if (user == null) {
+      print(" No user signed in");
+      return;
+    }
+
+    try {
+      await FirebaseFirestore.instance.collection("users").doc(user.uid).set({
+        'email': email,
+        'username': username,
+        'timestamp': FieldValue.serverTimestamp(),
+        'id': id,
+      });
+      print("Firestore write successful");
+    } catch (e, stack) {
+      print("Firestore error: $e");
+      print(stack);
+    }
   }
 }

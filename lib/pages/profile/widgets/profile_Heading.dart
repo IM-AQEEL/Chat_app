@@ -1,4 +1,5 @@
 import 'package:chat_app/config/AssetsImages.dart';
+import 'package:chat_app/controller/profilecontroller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -8,6 +9,7 @@ class ProfileHeading extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Profilecontroller profilecontroller = Get.put(Profilecontroller());
     return Column(
       children: [
         Container(
@@ -27,11 +29,11 @@ class ProfileHeading extends StatelessWidget {
               ),
               SizedBox(height: 20),
               Text(
-                'aqeel123@gmmail.com',
+                profilecontroller.currentuser.value.email! ?? "No user ",
                 style: Theme.of(context).textTheme.bodyLarge,
               ),
               Text(
-                'Muhammad Aqeel',
+                profilecontroller.currentuser.value.name ?? 'No User',
                 style: Theme.of(context).textTheme.bodySmall,
               ),
               SizedBox(height: 10),
