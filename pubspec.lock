@@ -49,6 +49,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.4.0"
+  chow_button:
+    dependency: "direct main"
+    description:
+      name: chow_button
+      sha256: "9758c54c14529e156458d6f5e3ab38c82b085fc668c5bbb99f5177f9049b731c"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.6"
   clock:
     dependency: transitive
     description:

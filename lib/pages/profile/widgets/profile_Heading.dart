@@ -1,6 +1,7 @@
 import 'package:chat_app/config/AssetsImages.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 
 class ProfileHeading extends StatelessWidget {
   const ProfileHeading({super.key});
@@ -42,7 +43,12 @@ class ProfileHeading extends StatelessWidget {
                     onPressed: () {},
                     icon: Icon(Icons.chat_bubble_outline_sharp),
                   ),
-                  IconButton(onPressed: () {}, icon: Icon(Icons.edit)),
+                  IconButton(
+                    onPressed: () {
+                      Get.toNamed('/updateprofile');
+                    },
+                    icon: Icon(Icons.edit),
+                  ),
                 ],
               ),
             ],
