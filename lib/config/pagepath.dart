@@ -1,8 +1,8 @@
 import 'package:chat_app/pages/AuthPages/authpage.dart';
 import 'package:chat_app/pages/HomePage/home.dart';
 import 'package:chat_app/pages/chat/chatpage.dart';
-import 'package:chat_app/pages/profile/profilepage.dart';
-import 'package:chat_app/pages/profile/updateprofile/updateprofile.dart';
+import 'package:chat_app/pages/Userprofile/user_profilepage.dart';
+import 'package:chat_app/pages/profilepages/personprofile.dart';
 import 'package:chat_app/widgets/welcome/welcome.dart';
 import 'package:get/route_manager.dart';
 
@@ -30,12 +30,13 @@ var pagepath = [
   ),
   GetPage(
     name: '/profilepage',
-    page: () => Profilepage(),
+    page: () => UserProfilepage(),
     transition: Transition.fade,
   ),
-  GetPage(
-    name: '/updateprofile',
-    page: () => Updateprofile(),
-    transition: Transition.fade,
-  ),
+  // GetPage(
+  //   name: "/updateprofile",
+  //   page: () => UserProfilepage(),
+  //   transition: Transition.fade,
+  // ),
+  GetPage(name: '/personprofile', page: () => PersonProfile()),
 ];

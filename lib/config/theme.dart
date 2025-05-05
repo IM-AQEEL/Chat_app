@@ -2,6 +2,7 @@ import 'package:chat_app/config/colors.dart';
 import 'package:flutter/material.dart';
 
 var lighttheme = ThemeData();
+
 var darktheme = ThemeData(
   brightness: Brightness.dark,
   useMaterial3: true,

@@ -1,13 +1,12 @@
 import 'package:chat_app/controller/AuthController.dart';
-import 'package:chat_app/pages/profile/widgets/profile_Descripaation.dart';
-import 'package:chat_app/pages/profile/widgets/profile_Heading.dart';
-import 'package:chat_app/pages/profile/widgets/profilebody.dart';
+import 'package:chat_app/pages/Userprofile/widgets/User_profile_Heading.dart';
+import 'package:chat_app/pages/Userprofile/widgets/User_profilebody.dart';
+import 'package:chat_app/pages/Userprofile/widgets/user_profile_Descripaation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 
-class Profilepage extends StatelessWidget {
-  const Profilepage({super.key});
+class UserProfilepage extends StatelessWidget {
+  const UserProfilepage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -32,11 +31,11 @@ class Profilepage extends StatelessWidget {
         scrollDirection: Axis.vertical,
         child: Column(
           children: [
-            ProfileHeading(),
+            UserProfileHeading(),
             SizedBox(height: 10),
-            Profilebody(),
+            UserProfilebody(),
             SizedBox(height: 20),
-            ProfileDescripaation(),
+            UserProfileDescripaation(),
           ],
         ),
       ),

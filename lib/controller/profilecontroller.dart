@@ -10,16 +10,21 @@ class Profilecontroller extends GetxController {
   //
   void onInit() async {
     super.onInit();
-    await getusers();
+    // await getusers();
   }
 
   Future<void> getusers() async {
-    await db
-        .collection('users')
-        .doc(auth.currentUser!.uid)
-        .get()
-        .then(
-          (value) => {currentuser.value = UserModel.fromJson(value.data()!)},
-        );
+    if (auth.currentUser == null) {
+      print("No user is currently signed in.");
+      return;
+    }
+
+    await db.collection('users').doc(auth.currentUser!.uid).get().then((value) {
+      if (value.exists && value.data() != null) {
+        currentuser.value = UserModel.fromJson(value.data()!);
+      } else {
+        print("User document not found or empty.");
+      }
+    });
   }
 }
